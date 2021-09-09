@@ -1,18 +1,21 @@
-# Instalação
+# ⬇️ Instalação
 **Para instalar, digite o comando abaixo no seu terminal e pressione ENTER:**
 ```
 br ideb
 ```
 Pronto, não precisa fazer mais nada, já está instalado!
 
-(Para ver o interior deste script, digite ``br -v ideb``)
-Caso digitar ``br ideb`` não tenha funcionado para você, você deverá instalar o BashRun (Link para instalar o BashRun: https://github.com/Felipecconde/br) (Não leva nem 30 segundos pra instalar o BashRun :p).
+_(⚠️ O comando acima não funcionou? Instale o `br` primeiro: https://github.com/Felipecconde/br)_
 <br>
-# Como utilizar o iDeb
+# ❓ Como utilizar o iDeb
 Após instalar o iDeb, digite "ideb -h" no seu Terminal para obter ajuda. Auto-explicativo, não?
 <br>
-# Instalações alternativas
-<h6>Utilize este método caso instalar utilizando o BashRun não funcionou para você<h6>
+<br>
+<br>
+<br>
+<br>
+# 🔀️ Instalações alternativas
+<h6>Utilize este método caso a instalação normal não funcionou para você<h6>
 Alternativamente, você pode instalar o iDeb copiando todo o código abaixo, e o colando em seu Terminal:
 
 ```
