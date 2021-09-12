@@ -1,0 +1,72 @@
+#!/bin/bash
+echo
+echo '- [*] Permissão de Super Usuário requerida para a instalação!'
+sudo echo > /dev/null 2>&1 &&
+sleep 1
+echo
+echo '- [*] Permissão de Super Usuário concedida!'
+sleep 1
+echo
+echo '- [!] Tentando remover iDeb para instalar a nova versão... (Etapa 1 de 3)'
+echo '      (Ignore isto caso você nunca instalou o iDeb antes)'
+sudo rm '/usr/bin/ideb' 2>&1 &&
+sleep 1
+echo
+echo '- [!] Prosseguindo para a instalação... (Etapa 2 de 3)'
+echo
+echo '- [!] Neste exato momento, o iDeb encontra-se inexistente/removido do sistema. Caso você não queira prosseguir para a instalação, feche o terminal AGORA, e então você continuará vivendo normalmente sem a existência do iDeb na sua vida.'
+echo
+echo
+sleep 0.3
+echo -e '\e[1A\e[^- [                    ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [|                   ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [||                  ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [|||                 ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [||||                ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [|||||               ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [||||||              ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [|||||||             ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [||||||||            ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [|||||||||           ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [||||||||||          ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [|||||||||||         ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [||||||||||||        ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [|||||||||||||       ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [||||||||||||||      ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [|||||||||||||||     ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [||||||||||||||||    ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [|||||||||||||||||   ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [||||||||||||||||||  ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [||||||||||||||||||| ] Prosseguindo para a próxima etapa...';
+sleep 0.3
+echo -e '\e[1A\e[^- [||||||||||||||||||||] Prosseguindo para a próxima etapa...';
+sleep 3
+echo
+echo '- [!] Instalando "iDeb"...'
+sudo chmod +x 'ideb' 2>&1 &&
+sudo mv 'ideb' '/usr/bin/ideb' 2>&1 &&
+sleep 2
+echo
+echo '- [:)] "iDeb" instalado com sucesso!'
+echo
+echo '- [!] Agora você pode digitar "ideb" em qualquer lugar no terminal para utilizar o iDeb.'
+exit
