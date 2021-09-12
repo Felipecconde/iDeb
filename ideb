@@ -1,0 +1,189 @@
+#!/bin/bash
+
+#LIVRE PARA MODIFICAR E COMPARTILHAR! POR FAVOR, DEIXE OS CRÉDITOS!
+#FREE TO MODIFY AND SHARE! PLEASE, PUT THE CREDITS!
+
+#FERRAMENTA SIMPLES PARA INSTALAR PACOTES DEBIAN A PARTIR DA URL
+#SIMPLE TOOL TO INSTALL DEBIAN PACKAGES BY THE URL
+
+#USO: "ideb <URL>"; EXEMPLO: "ideb https://exemplo.com/exemplo.deb"
+#USAGE: "ideb <URL>"; EXEMPLO: "ideb https://example.com/example.deb"
+
+input=$*
+if [ "$*" == "--help" ] || [ "$*" == "-help" ] || [ "$*" == "-h" ] || [ "$*" == "help" ] ;
+then
+echo "---------------------------- AJUDA ----------------------------"
+echo 'Esta é uma ferramenta simples de código aberto desenvolvida por Felipecconde para instalar pacotes ".DEB" a partir de uma URL. É mais simples do que ter que utilizar wget e dpkg em seguida. Além disso, esta ferramenta possui um sistema de auto-reparo automático em caso de instalação mal-sucedida.'
+echo 'Acesse a página oficial do iDeb: felipecconde.weebly.com/ideb'
+echo 'USO: "ideb <URL>"; EXEMPLO: "ideb https://exemplo.com/exemplo.deb'
+echo
+echo "- [!] Você está utilizando o iDeb na versão 1."
+echo
+echo "+-------------------------------+-----------------------------+"
+echo "| ARGUMENTO                     | DESCRIÇÃO                   |"
+echo "|-------------------------------+-----------------------------|"
+echo "| -h / --help / -help / help    | Exibe esta tela de ajuda.   |"
+echo "| -r / --repair                 | Repara IDEB, DPKG e APT.    |"
+echo "| -t / --trash                  | Move o cache para o lixo.   |"
+echo "| -c / --clear                  | Esvazia a lixeira.          |"
+echo "| -e / --erase                  | Roda 'ideb -t' e 'ideb -c'. |"
+echo "+-------------------------------+-----------------------------+"
+exit
+fi
+if [ "$*" == "--trash" ] || [ "$*" == "-t" ];
+then
+ echo "- [!] O cache é automaticamente movido para a lixeira toda vez que você instala um pacote utilizando o iDeb. Não é necessário utilizar este comando, exceto se o iDeb falhar durante a execução de algum comando por conta do cache."
+ echo
+ echo "- [!] Note que isto não exclui o cache, isto apenas move o cache para '/.ideb/trash'. Para excluir os arquivos da lixeira, digite 'ideb -c', ou, para remover o cache e limpar a lixeira ao mesmo tempo, digite 'ideb -e'. É recomendado que faça backup dos pacotes para que possa corrigir problemas de pacotes quebrados e de dependências no futuro."
+ echo
+ echo "- [!] O(s) seguinte(s) arquivo(s) será(ão) movido(s) para a lixeira do iDeb:"
+ ls -A /home/$USER/.ideb/cache/
+ sleep 1
+ echo
+ echo '- [-] Movendo o cache para a lixeira...'
+ mv /home/$USER/.ideb/cache/* /home/$USER/.ideb/trash/ > /dev/null 2>&1
+ sleep 0.5
+ echo
+ echo '- [:o] Cache movido para a lixeira!'
+ exit
+fi
+ if [ "$*" == "--erase" ] || [ "$*" == "-e" ];
+ then
+ echo ':::::=====----- Executando "ideb -t": Movendo cache para lixeira... -----=====:::::'
+ ideb -t
+ echo
+ echo
+ echo ':::::=====----- Executando "ideb -c": Esvaziando lixeira do iDeb... -----=====:::::'
+ ideb -c
+ exit
+ fi
+ if [ "$*" == "--clear" ] || [ "$*" == "-c" ];
+ then
+ echo '- [!] ATENÇÃO: É recomendado que faça backup dos pacotes para que possa corrigir problemas de pacotes quebrados e de dependências no futuro. Caso tenha executado este comando por acidente, acesse a lixeira do seu computador ("/home/$USER/.local/share/Trash/") e mova os arquivos necessários de volta para a lixeira do iDeb (Execute "ideb -p" para abrir o diretório do iDeb e navegue para "/trash" [~/.ideb/trash]) ou para algum lugar seguro.'
+ echo
+ echo "- [!] Para remover o cache (ideb --trash) e limpar a lixeira (ideb --clear) ao mesmo tempo, digite 'ideb -e'."
+ echo
+ echo "- [!] O(s) seguinte(s) arquivo(s) será(ão) excluído(s) da lixeira do iDeb:"
+ ls -A /home/$USER/.ideb/trash/
+ sleep 1
+ echo
+ echo "- [-] Limpando lixeira..."
+ sleep 3
+ echo
+ echo '- [!] Lixeira limpa com sucesso! O lixo do iDeb foi despejado na lixeira do seu computador.'
+        mv /home/$USER/.ideb/trash/* /home/$USER/.local/share/Trash/ > /dev/null 2>&1
+        exit
+fi
+if [ "$*" == "--repair" ] || [ "$*" == "-r" ];
+then
+ sudo echo > /dev/null 2>&1
+ echo '- [1/8] Corrigindo...';
+ mv /home/$USER/.ideb/cache/* /home/$USER/.ideb/trash/ > /dev/null 2>&1
+ sleep 0.5
+ echo -e '\e[1A\e[^- [2/8] Corrigindo...';
+ sudo apt --fix-broken -y install > /dev/null 2>&1
+ sleep 0.5
+ echo -e '\e[1A\e[^- [3/8] Corrigindo...';
+ sudo apt autoremove > /dev/null 2>&1
+ sleep 0.5
+ echo -e '\e[1A\e[^- [4/8] Corrigindo...';
+ sudo dpkg --configure -a > /dev/null 2>&1
+ sleep 0.5
+ echo -e '\e[1A\e[^- [5/8] Corrigindo...';
+ sudo apt --fix-broken -y remove > /dev/null 2>&1
+ sleep 0.5
+ echo -e '\e[1A\e[^- [6/8] Corrigindo...';
+ sudo apt --fix-broken -y purge > /dev/null 2>&1
+ sleep 0.5
+ echo -e '\e[1A\e[^- [7/8] Corrigindo...';
+ sudo apt -y update > /dev/null 2>&1
+ sleep 0.5
+ echo -e '\e[1A\e[^- [8/8] Corrigindo...';
+ sudo apt -y upgrade > /dev/null 2>&1
+ sleep 0.5
+ echo -e '\e[1A\e[^- [;)] iDeb, dpkg e APT corrigidos com sucesso!';
+exit
+fi
+if [ "$1" == "--teste" ];
+then
+input=$2 $3 $4 $5 $6 $7 $8 $9
+echo "teste"
+fi
+ if [ "$input" == "" ];
+ then
+ echo "[!] ERRO: Você precisa especificar uma URL para um arquivo .deb";
+ echo '          Caso precise de ajuda, utilize o comando "ideb -h".';
+ exit
+ fi
+mkdir "/home/$USER/.ideb" > /dev/null 2>&1
+mkdir "/home/$USER/.ideb/cache" > /dev/null 2>&1
+mkdir "/home/$USER/.ideb/trash" > /dev/null 2>&1
+mv /home/$USER/.ideb/cache/* /home/$USER/.ideb/trash/ > /dev/null 2>&1
+echo "- [1/3] Baixando arquivo..."
+wget "$input" -P "/home/$USER/.ideb/cache/" -q --show-progress
+
+debcheck=$(file /home/$USER/.ideb/cache/* | grep -o "Debian binary package")
+ if [ "$debcheck" == "Debian binary package" ];
+ then
+ echo
+ echo '- [2/3] Instalando pacote...';
+ else
+ echo -e '\e[1A\e[^- [!] ERRO: O arquivo não existe ou não é um arquivo .deb';
+ echo '            Caso precise de ajuda, utilize o comando "ideb -h".';
+ exit
+fi
+sudo dpkg --install /home/$USER/.ideb/cache/*.deb > /dev/null 2>&1;
+install=$?
+if [ "$install" == "0" ];
+ then
+ echo
+ echo '- [3/3] Finalizando processo...';
+mv /home/$USER/.ideb/cache/* /home/$USER/.ideb/trash/ > /dev/null 2>&1
+ sleep 0.5
+ echo
+ echo '- [>:D] Pacote instalado com sucesso!';
+ exit
+ else
+ echo
+ echo '- [!] ERRO: Ocorreu um erro durante a instalação!';
+ sleep 0.5
+ echo
+ echo '- [-] Corrigindo erro... (Isto pode demorar alguns minutos)'
+ sudo apt --fix-broken -y install > /dev/null 2>&1
+ sudo apt autoremove > /dev/null 2>&1
+ sudo dpkg --configure -a > /dev/null 2>&1
+ echo
+ echo '- [-] Retomando processo...'
+ sleep 0.5
+fi
+if [ "$debcheck" == "Debian binary package" ];
+ then
+ echo
+ echo '- [2/3] Instalando pacote...';
+ else
+ echo -e '\e[1A\e[^- [!] ERRO: O arquivo não existe ou não é um arquivo .deb';
+ echo '            Caso precise de ajuda, utilize o comando "ideb -h".';
+ exit
+fi
+ sudo dpkg --install /home/$USER/.ideb/cache/*.deb > /dev/null 2>&1;
+install=$?
+ echo
+ echo '- [3/3] Finalizando processo...';
+mv /home/$USER/.ideb/cache/* /home/$USER/.ideb/trash/ > /dev/null 2>&1
+ sleep 0.5
+if [ "$install" == "0" ];
+ then
+ echo
+ echo '- [:D] Pacote instalado com sucesso!';
+ exit
+ else
+ echo
+ sudo apt --fix-broken -y remove > /dev/null 2>&1
+ sudo apt --fix-broken -y purge > /dev/null 2>&1
+ echo '- [!] ERRO: Ocorreu um erro durante a instalação! Tente corrigir manualmente.';
+ exit
+fi
+ echo
+ echo '- [3/3] Finalizando processo...';
+mv /home/$USER/.ideb/cache/* /home/$USER/.ideb/trash/ > /dev/null 2>&1
+exit
