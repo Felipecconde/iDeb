@@ -17,7 +17,7 @@ echo 'Esta é uma ferramenta simples de código aberto desenvolvida por Felipecc
 echo 'Acesse a página oficial do iDeb: felipecconde.weebly.com/ideb'
 echo 'USO: "ideb <URL>"; EXEMPLO: "ideb https://exemplo.com/exemplo.deb'
 echo
-echo "- [!] Você está utilizando o iDeb na versão 1."
+echo "- [!] Você está utilizando o iDeb na versão 1.1."
 echo
 echo "+-------------------------------+-----------------------------+"
 echo "| ARGUMENTO                     | DESCRIÇÃO                   |"
@@ -84,7 +84,7 @@ then
  sudo apt --fix-broken -y install > /dev/null 2>&1
  sleep 0.5
  echo -e '\e[1A\e[^- [3/8] Corrigindo...';
- sudo apt autoremove > /dev/null 2>&1
+ sudo apt -y autoremove > /dev/null 2>&1
  sleep 0.5
  echo -e '\e[1A\e[^- [4/8] Corrigindo...';
  sudo dpkg --configure -a > /dev/null 2>&1
