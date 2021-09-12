@@ -1,11 +1,11 @@
-# ⬇️ Instalação
-**Para instalar, digite o comando abaixo no seu terminal e pressione ENTER:**
+# ⬇️ Installation
+**To install, run the command bellow on your Terminal:**
 ```
 br ideb
 ```
-Pronto, não precisa fazer mais nada, já está instalado!
+All is ready, you don't need to do anything else, it's installed!
 
-_(⚠️ O comando acima não funcionou? Instale o `br` primeiro: https://github.com/Felipecconde/br)_
+_(⚠️ The command ahead does not works? Install `br` first: https://github.com/Felipecconde/br)_
 <br>
 # ❓ Como utilizar o iDeb
 Após instalar o iDeb, digite "ideb -h" no seu Terminal para obter ajuda. Auto-explicativo, não?
